@@ -894,7 +894,7 @@ while true do
         end
     else
         for _, room in ipairs(workspace.CurrentRooms:GetChildren()) do
-            local trigger = room:FindFirstChild("TriggerEventCollision")
+            local trigger = room:FindFirstChild("TriggerEventCollision") or room:FindFirstChild("TriggerSeek")
             if trigger and trigger:IsA("Model") then
                 for _, descendant in ipairs(trigger:GetDescendants()) do
                     if descendant:IsA("TouchTransmitter") then
