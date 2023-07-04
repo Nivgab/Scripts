@@ -374,7 +374,7 @@ Button4.TextScaled = true
 Button4.TextSize = 14.000
 Button4.TextWrapped = true
 Button4.MouseButton1Down:connect(function()
-rep = game.ReplicatedStorage for i,v in pairs(rep:GetDescendants()) do if v.Name == "A90" then v:Destroy() end end    
+rep = game.ReplicatedStorage for i,v in pairs(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game:GetDescendants()) do if v.Name == "A90" then v:Destroy() end end    
 end)
 
 UIStroke_11.Parent = Button4
