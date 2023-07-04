@@ -368,23 +368,13 @@ Button4.BackgroundTransparency = 0.800
 Button4.Position = UDim2.new(0.502590656, 0, 0.0872894078, 0)
 Button4.Size = UDim2.new(0, 170, 0, 50)
 Button4.Font = Enum.Font.Cartoon
-Button4.Text = "auto do a-90"
+Button4.Text = "delete a-90"
 Button4.TextColor3 = Color3.fromRGB(255, 222, 189)
 Button4.TextScaled = true
 Button4.TextSize = 14.000
 Button4.TextWrapped = true
 Button4.MouseButton1Down:connect(function()
-      local ui = game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Jumpscare.Jumpscare_A90.Face
-	while true do
-task.wait()
-if ui.Visible == true then
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-task.wait(1.71)
-ui.Visible = false
-elseif ui.Visible == false then
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 21
-end
-end
+rep = game.ReplicatedStorage for i,v in pairs(rep:GetDescendants()) do if v.Name == "A90" then v:Destroy() end end    
 end)
 
 UIStroke_11.Parent = Button4
