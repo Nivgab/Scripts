@@ -371,7 +371,7 @@ function getPlayer(list,speaker)
 end
 function Destroy(instance)
   spawn(function()
-    game:GetService("ReplicatedStorage").DeleteCar:FireServer(instance)
+    game.ReplicatedStorage.Events:WaitForChild("OnDoorHit"):FireServer(instance)
   end)
 end
 
