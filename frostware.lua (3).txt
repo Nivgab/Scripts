@@ -3671,7 +3671,7 @@ do
 
 	local exploitSettings = {
 		title = "Exploit Settings",
-		icon = "rbxassetid://11558196447",
+		icon = image('exec', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-10.png'),
 		overwritePosition = UDim2.new(0, 0, 1, -66),
 		selected = nil
 	};
@@ -4277,21 +4277,21 @@ do
 		end
 
 		do
-			editorButton("New Tab", "rbxassetid://14808232261", {
+			editorButton("New Tab", image('exec', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-6.png'), {
 				MouseButton1Click = function()
 					tabSystem:Add("Script " .. tostring(tabSystem.accumulator + 1));
 				end,
 				Parent = base.buttons
 			});
 
-			editorButton("Save Current Tab", "rbxassetid://14883119324", {
+			editorButton("Save Current Tab", image('exec', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-5.png'), {
 				MouseButton1Click = function()
 					popups:Show("saveCurrentTab", select(-1, tabSystem:Get(self.selected)));
 				end,
 				Parent = base.buttons
 			});
 
-			editorButton("Execute Clipboard", "rbxassetid://14808228630", {
+			editorButton("Execute Clipboard", image('exec', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-4.png'), {
 				MouseButton1Click = function()
 					if getclipboard then
 						internalUtils:Execute(getclipboard());
@@ -4300,14 +4300,14 @@ do
 				Parent = base.buttons
 			});
 
-			editorButton("Clear", "rbxassetid://14808219001", {
+			editorButton("Clear", image('exec', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-3.png'), {
 				MouseButton1Click = function()
 					self:SetText("");
 				end,
 				Parent = base.buttons
 			});
 
-			editorButton("Execute", "rbxassetid://14808225296", {
+			editorButton("Execute", image('exec', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-2.png'), {
 				BackgroundColor3 = Color3.fromRGB(76, 161, 235),
 				MouseButton1Click = function()
 					internalUtils:Execute(self.text);
@@ -4784,7 +4784,7 @@ do
 
 	local localScripts = {
 		title = "Local Scripts",
-		icon = "rbxassetid://11558196718",
+		icon = image('local', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-8.png'),
 		selected = nil
 	};
 
@@ -5045,7 +5045,7 @@ do
 
 	local globalScripts = {
 		title = "Global Scripts",
-		icon = "rbxassetid://13449277995",
+		icon = image('global', 'https://raw.githubusercontent.com/Nivgab/Scripts/refs/heads/main/image0-9.png'),
 		isSearching = false
 	};
 
