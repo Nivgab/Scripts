@@ -1,1 +1,109 @@
-getrenv().getgenv=getgenv
+if not isfile("settings.json") then
+writefile("settings.json",game.HttpService:JSONEncode({HttpEnabled=true, FilesEnabled=true}))
+end
+if not isfolder("game") then
+makefolder("game")
+end
+rootid=game.HttpService:JSONDecode(game:HttpGet('https://develop.roblox.com/v1/universes/'..game.GameId)).rootPlaceId
+name="game/"..tostring(game.GameId)..' ('..game:GetService("MarketplaceService"):GetProductInfo(rootid).Name..")"
+if not isfolder(name) then
+makefolder(name)
+end
+getsettings=function()
+return game.HttpService:JSONDecode(readfile'settings.json')
+end
+getgenv().readfile=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return readfile(name..'/'..x,y)
+end
+getgenv().getcustomasset=function(x,y)
+return getcustomasset(name..'/'..x,y)
+end
+getgenv().writefile=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return writefile(name..'/'..x,y)
+end
+getgenv().makefolder=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return makefolder(name..'/'..x,y)
+end
+getgenv().appendfile=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return appendfile(name..'/'..x,y)
+end
+getgenv().loadfile=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return loadfile(name..'/'..x,y)
+end
+getgenv().listfiles=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return listfiles(name..'/'..x,y)
+end
+getgenv().isfile=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return isfile(name..'/'..x,y)
+end
+getgenv().isfolder=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return isfolder(name..'/'..x,y)
+end
+getgenv().delfolder=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return delfolder(name..'/'..x,y)
+end
+getgenv().delfile=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end
+return delfile(name..'/'..x,y)
+end
+getallenvironments = function()
+local scripts = {}
+table.foreach(getreg(), function(x, y)
+if type(y) == 'thread' then
+local env = gettenv(y)
+if env and not scripts[env] then
+scripts[env] = env
+end
+end
+end)
+return scripts
+end
+changeallenv=function(x,y)
+if not getsettings().FilesEnabled then
+return "Disabled"
+end table.foreach(getallenvironments(), function(z,v) rawset(v, x, y) end) end
+oldreq=request
+getgenv().request=function(x,y)
+if getsettings().HttpEnabled then
+return oldreq(x,y)
+end
+warn("HTTP is disabled!")
+return {Body="Disabled", Success=false, StatusCode=401, StatusMessage="Unauthorized",Headers={}, Cookies={}} 
+end
+go=game.GetObjects
+function getobjects(x)
+return go(game,x)
+end
+getgenv().GetObjects=getobjects
+for i,v in pairs(getgenv()) do
+changeallenv(i,v)
+end
