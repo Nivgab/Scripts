@@ -12,6 +12,7 @@ end
 getsettings=function()
 return game.HttpService:JSONDecode(readfile'settings.json')
 end
+getgenv().getsettings=getsettings
 getgenv().readfile=function(x,y)
 if not getsettings().FilesEnabled then
 return "Disabled"
