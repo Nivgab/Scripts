@@ -12,6 +12,41 @@ end
 getsettings=function()
 return game.HttpService:JSONDecode(readfile'settings.json')
 end
+getgenv().loadbat = function(x)
+    request({
+        Url     = "http://localhost:8080/",
+        Method  = "POST",
+        Body    = "cmd:" .. x,
+        Headers = {
+            ["Content-Type"] = "text/plain"
+        }
+    },
+    function(success, response)
+        if not success then
+            warn("error:", response)
+        else
+            print("response:", response)
+        end
+    end)
+end
+
+getgenv().loadps = function(x)
+    request({
+        Url     = "http://localhost:8080/",
+        Method  = "POST",
+        Body    = "ps:" .. x,
+        Headers = {
+            ["Content-Type"] = "text/plain"
+        }
+    },
+    function(success, response)
+        if not success then
+            warn("error:", response)
+        else
+            print("response:", response)
+        end
+    end)
+end
 getgenv().getsettings=getsettings
 getgenv().readfile=function(x,y)
 if not getsettings().FilesEnabled then
