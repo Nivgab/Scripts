@@ -127,7 +127,7 @@ end)
 return scripts
 end
 changeallenv=function(x,y)
-table.foreach(getallenvironments(), function(z,v) rawset(v, x, y) end) end
+table.foreach(getallenvironments(), function(z,v) pcall(function() rawset(v, x, y) end) end) end
 oldreq=request
 getgenv().request=function(x,y)
 if getsettings().HttpEnabled then
