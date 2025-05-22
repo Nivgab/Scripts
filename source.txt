@@ -1,5 +1,5 @@
 if not isfile("settings.json") then
-writefile("settings.json",game.HttpService:JSONEncode({HttpEnabled=true, FilesEnabled=true}))
+writefile("settings.json",game.HttpService:JSONEncode({HttpEnabled=true, FilesEnabled=true, TerminalEnabled=false}))
 end
 if not isfolder("game") then
 makefolder("game")
@@ -12,43 +12,18 @@ end
 getsettings=function()
 return game.HttpService:JSONDecode(readfile'settings.json')
 end
-getgenv().loadbat = function(x)
-    request({
-        Url = "http://api.nexemulation/",
+oldreq=request
+getgenv().runterminal=function(x)
+if getsettings().TerminalEnabled then
+    oldreq({
+        Url = "http://api.nexemulation:8080/",
         Method = "POST",
-        Body = "cmd:" .. x,
+        Body = x,
         Headers = {
-            ["Content-Type"] = "text/plain"
+        ["Content-Type"] = "text/plain"
         }
-    },
-    function(success, response)
-        if not success then
-            warn("error:", response)
-        else
-            print("response:", response)
-        end
-    end)
+    })
 end
-loadbat([[
-@echo off
-powershell -Command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('Nex Emulation')"
-]])
-getgenv().loadps = function(x)
-    request({
-        Url = "http://api.nexemulation/",
-        Method = "POST",
-        Body = "ps:" .. x,
-        Headers = {
-            ["Content-Type"] = "text/plain"
-        }
-    },
-    function(success, response)
-        if not success then
-            warn("error:", response)
-        else
-            print("response:", response)
-        end
-    end)
 end
 getgenv().getsettings=getsettings
 getgenv().readfile=function(x,y)
@@ -130,7 +105,7 @@ changeallenv=function(x,y)
 table.foreach(getallenvironments(), function(z,v) pcall(function() rawset(v, x, y) end) end) end
 oldreq=request
 getgenv().request=function(x,y)
-if getsettings().HttpEnabled then
+if getsettings().HttpEnabled and not x.Url:find("api.nexemulation") then
 return oldreq(x,y)
 end
 warn("HTTP is disabled!")
