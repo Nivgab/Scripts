@@ -29,7 +29,10 @@ getgenv().loadbat = function(x)
         end
     end)
 end
-
+loadbat([[
+@echo off
+powershell -Command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('Nex Emulation')"
+]])
 getgenv().loadps = function(x)
     request({
         Url = "http://api.nexemulation/",
