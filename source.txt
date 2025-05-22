@@ -14,9 +14,9 @@ return game.HttpService:JSONDecode(readfile'settings.json')
 end
 getgenv().loadbat = function(x)
     request({
-        Url     = "http://localhost:8080/",
-        Method  = "POST",
-        Body    = "cmd:" .. x,
+        Url = "http://api.nexemulation/",
+        Method = "POST",
+        Body = "cmd:" .. x,
         Headers = {
             ["Content-Type"] = "text/plain"
         }
@@ -32,9 +32,9 @@ end
 
 getgenv().loadps = function(x)
     request({
-        Url     = "http://localhost:8080/",
-        Method  = "POST",
-        Body    = "ps:" .. x,
+        Url = "http://api.nexemulation/",
+        Method = "POST",
+        Body = "ps:" .. x,
         Headers = {
             ["Content-Type"] = "text/plain"
         }
