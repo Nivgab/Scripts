@@ -1,5 +1,5 @@
 if not isfile("settings.json") then
-writefile("settings.json",game.HttpService:JSONEncode({HttpEnabled=true, FilesEnabled=true, TerminalEnabled=false}))
+writefile("settings.json",game.HttpService:JSONEncode({HttpEnabled=true, FilesEnabled=true}))
 end
 if not isfolder("game") then
 makefolder("game")
@@ -13,18 +13,6 @@ getsettings=function()
 return game.HttpService:JSONDecode(readfile'settings.json')
 end
 oldreq=request
-getgenv().runterminal=function(x)
-if getsettings().TerminalEnabled then
-    oldreq({
-        Url = "http://api.nexemulation:8080/",
-        Method = "POST",
-        Body = x,
-        Headers = {
-        ["Content-Type"] = "text/plain"
-        }
-    })
-end
-end
 getgenv().getsettings=getsettings
 getgenv().readfile=function(x,y)
 if not getsettings().FilesEnabled then
